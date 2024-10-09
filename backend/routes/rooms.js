@@ -4,6 +4,7 @@ import {
   deletRoom,
   getAllRoom,
   getUniqueRoom,
+  updateAvailibility,
   updateRoom,
 } from "../controllers/roomController.js";
 import { verifyAdmin } from "../utils/verifyToken.js";
@@ -14,6 +15,7 @@ const route = express.Router();
 route.post("/:hotelid", verifyAdmin, createRoom);
 // update
 route.put("/:id", verifyAdmin, updateRoom);
+route.put("/availability/:id", updateAvailibility);
 // delete
 route.delete("/:id/:hotelid", verifyAdmin, deletRoom);
 // GEt Unique hotles

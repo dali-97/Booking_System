@@ -26,7 +26,7 @@ mongoose.connection.on("disconnected", () => {
 mongoose.connection.on("connected", () => {
   console.log("MongoDB connected !");
 });
-app.use(cors({origin : 'http://localhost:5173'}))
+// app.use(cors({origin : 'http://localhost:5173'}))
 app.use(cookieParser())
 app.use(express.json());
 app.use("/api/auth", authRoute);

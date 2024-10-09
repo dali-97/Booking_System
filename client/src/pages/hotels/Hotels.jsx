@@ -16,19 +16,22 @@ import {
   faCircleXmark,
 } from "@fortawesome/free-regular-svg-icons";
 import useFetch from "../../hooks/useFetch";
-import { useLocation } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import Loading from "../../components/loadingComponents/Loading";
 import { SearchContext } from "../../context/SearchContext";
-// import { SearchContext } from "../../context/SearchContext";
+import { AuthContext } from "../../context/AuthContext";
+import Modal from "../../components/moadlComponents/Modal";
 
 const Hotels = () => {
+  const navigate = useNavigate();
   const location = useLocation();
   const id = location.pathname.split("/")[2];
   const { data, error, loading, refatch } = useFetch(`/api/hotels/find/${id}`);
   const [slidNumber, setSlidNumber] = useState(0);
   const [openSlid, setOpenSlid] = useState(false);
+  const [openModal, setOpenModal] = useState(false);
 
-  const { dates , options } = useContext(SearchContext);
+  const { dates, options } = useContext(SearchContext);
   // transform the dates
   const MILLISECONDS_PER_DAY = 1000 * 60 * 60 * 24;
   function dayDifference(date1, date2) {
@@ -37,6 +40,16 @@ const Hotels = () => {
     return diffDays;
   }
   const days = dayDifference(dates[0].endDate, dates[0].startDate);
+
+  const { user } = useContext(AuthContext);
+
+  const handleClick = () => {
+    if (user) {
+      setOpenModal((prev) => !prev);
+    } else {
+      navigate("/login");
+    }
+  };
 
   const handelOpen = (index) => {
     setSlidNumber(index);
@@ -124,9 +137,10 @@ const Hotels = () => {
                     location score of9.8!
                   </span>
                   <h2>
-                    <b>${`${data.cheapestPrice * days * options.room} `}</b> ({days}night)
+                    <b>${`${data.cheapestPrice * days * options.room} `}</b> (
+                    {days}night)
                   </h2>
-                  <button>Reserve or Book Now!</button>
+                  <button onClick={handleClick}>Reserve or Book Now!</button>
                 </div>
               </div>
             </div>
@@ -135,6 +149,7 @@ const Hotels = () => {
           </div>
         </>
       )}
+      {openModal && <Modal setOpen={setOpenModal} hotelID={id}/>}
     </div>
   );
 };
