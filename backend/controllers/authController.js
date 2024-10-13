@@ -10,8 +10,7 @@ export const register = async (req, res, next) => {
     var hashPassword = bcrypt.hashSync(password, salt);
 
     const newUSer = new User({
-      username,
-      email,
+      ...req.body,
       password: hashPassword,
     });
     await newUSer.save();
@@ -38,7 +37,7 @@ export const login = async (req, res, next) => {
         httpOnly: true,
       })
       .status(200)
-      .json({ ...otherDeatails });
+      .json({ details :{...otherDeatails} , isAdmine });
   } catch (error) {
     next(error);
   }

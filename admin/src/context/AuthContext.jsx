@@ -2,7 +2,7 @@ import { createContext, useEffect, useReducer } from "react";
 
 //  initial state
 const INITIAL_STATE = {
-  user: null,
+  user: JSON.parse(localStorage.getItem('user')) || null,
   Loading: false,
   error: null,
 };

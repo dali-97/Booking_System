@@ -16,7 +16,7 @@ import { useContext } from "react";
 import { DarkModeContext } from "../../context/darkModeContext";
 
 const SidBar = () => {
-  const {dispatch} = useContext(DarkModeContext)
+  const { dispatch } = useContext(DarkModeContext);
   return (
     <div className="sidebar">
       <div className="top">
@@ -39,16 +39,18 @@ const SidBar = () => {
               <span>Users</span>
             </li>
           </Link>
-          <Link to="/products" style={{ textDecoration: "none" }}>
+          <Link to="/hotels" style={{ textDecoration: "none" }}>
             <li>
               <RoofingIcon className="icon" />
-              <span>Products</span>
+              <span>Hotels</span>
             </li>
           </Link>
-          <li>
-            <Inventory2OutlinedIcon className="icon" />
-            <span>Orders</span>
-          </li>
+          <Link to="/rooms" style={{ textDecoration: "none" }}>
+            <li>
+              <Inventory2OutlinedIcon className="icon" />
+              <span>Rooms</span>
+            </li>
+          </Link>
           <li>
             <LocalShippingIcon className="icon" />
             <span>Delivery</span>
@@ -87,8 +89,14 @@ const SidBar = () => {
         </ul>
       </div>
       <div className="bottom">
-        <div className="colorOption" onClick={() => dispatch({type : 'LIGHT'})}></div>
-        <div className="colorOption" onClick={() => dispatch({type : 'DARK'})}></div>
+        <div
+          className="colorOption"
+          onClick={() => dispatch({ type: "LIGHT" })}
+        ></div>
+        <div
+          className="colorOption"
+          onClick={() => dispatch({ type: "DARK" })}
+        ></div>
       </div>
     </div>
   );

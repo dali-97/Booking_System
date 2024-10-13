@@ -7,24 +7,26 @@ export const userColumns = [
     renderCell: (prams) => {
       return (
         <div className="cellWithImg">
-          <img className="celImage" src={prams.row.img} alt="avatar" />
+          <img className="celImage" src={prams.row.img || "https://www.svgrepo.com/show/192247/man-user.svg" } alt="avatar" />
           {prams.row.username}
         </div>
       );
     },
   },
   { field: "email", headerName: "Email", width: 230 },
-  { field: "age", headerName: "Age", width: 100 },
-  {
-    field: "status",
-    headerName: "Status",
-    width: 160,
-    renderCell: (prams) => {
-      return <div>
-        <span className={`cellWithStatus ${prams.row.status}`}>{prams.row.status}</span>
-      </div>;
-    },
-  },
+  { field: "city", headerName: "city", width: 100 },
+  { field: "phone", headerName: "Phone", width: 100 },
+  { field: "country", headerName: "country", width: 100 },
+  // {
+  //   field: "status",
+  //   headerName: "Status",
+  //   width: 160,
+  //   renderCell: (prams) => {
+  //     return <div>
+  //       <span className={`cellWithStatus ${prams.row.status}`}>{prams.row.status}</span>
+  //     </div>;
+  //   },
+  // },
 ];
 
 // temorary data
